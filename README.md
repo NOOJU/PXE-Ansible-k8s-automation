@@ -37,14 +37,16 @@
 
 ### 물리 아키텍처
 
-본 프로젝트에서는 Windows 11 환경 위에 Hyper-V 기반의 멀티 노드 Kubernetes 클러스터를 구축합니다.
+본 프로젝트에서는 Windows 11 환경 위에 Hyper-V 기반의 멀티 노드 Kubernetes 클러스터를 구축합니다.    
+
+<img width="780" alt="image" src="https://github.com/user-attachments/assets/5f84dd94-79dc-438f-ac76-b4547774b0e7" />
 
 - 2대의 Windows 11 데스크탑(A, B) 위에서 Hyper-V 활성화 후 가상 스위치 생성.
 - External Virtual Switch를 통해 물리 랜 카드와 브리지로 연결하여 외부 네트워크(인터넷) 접근 가능하도록 구성.
 - PXE 및 Kubernetes 네트워크 구성을 위해 VM 당 3개의 NIC 사용:
   - **NIC1:** Management용 (PXE 서버 및 Ansible 관리 용도)
-  - **NIC2 (VLAN 5):** Internal 네트워크 용도 (내부 Kubernetes 트래픽)
-  - **NIC3 (VLAN 6):** External 네트워크 용도 (외부 접근 용도, 인터넷 등)
+  - **NIC2:** Internal 네트워크 용도 (내부 Kubernetes 트래픽)
+  - **NIC3:** External 네트워크 용도 (외부 접근 용도, 인터넷 등)
 
 ### VM NIC 구성 및 VLAN
 
@@ -81,12 +83,16 @@
 ## 구축 방법 (Installation)
 
 ### PXE 서버 구성
+<img width="608" alt="image" src="https://github.com/user-attachments/assets/dfd45efd-d620-4b6e-b37c-d7a827caa04f" />    
+
 - 부트스트랩 노드 VM 생성 (Rocky Linux 9 설치)
 - DHCP/TFTP 서버 설정 (`/etc/dhcp/dhcpd.conf`)
 - TFTP 디렉터리 설정 (`/var/lib/tftpboot`)
 - Kickstart 설정으로 OS 무인 설치 자동화
 
 ### Ansible 환경 구축
+<img width="608" alt="image" src="https://github.com/user-attachments/assets/d941d640-a328-4eb8-b05b-857e13f7c666" />    
+
 - Ansible 설치 및 인벤토리 구성
 - SSH 키 배포 (비밀번호 없는 접속 환경 구축)
 - Kubernetes 설치 및 설정 플레이북 실행
